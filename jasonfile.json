@@ -1,0 +1,97 @@
+{
+  "columns": [],
+  "datasource": "MySQL",
+  "fontSize": "100%",
+  "gridPos": {
+    "h": 9,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  },
+  "id": 2,
+  "options": {},
+  "pageSize": null,
+  "scroll": true,
+  "showHeader": true,
+  "sort": {
+    "col": 0,
+    "desc": true
+  },
+  "styles": [
+    {
+      "alias": "Time",
+      "dateFormat": "YYYY-MM-DD",
+      "pattern": "Time",
+      "type": "date"
+    },
+    {
+      "alias": "",
+      "colorMode": "cell",
+      "colors": [
+        "rgba(50, 172, 45, 0.97)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "decimals": 2,
+      "pattern": "Progress",
+      "thresholds": [
+        "4",
+        "5"
+      ],
+      "type": "string",
+      "unit": "short",
+      "mappingType": 1,
+      "valueMaps": [
+        {
+          "value": "5",
+          "text": "Active"
+        },
+        {
+          "value": "4",
+          "text": "Latent"
+        },
+        {
+          "value": "3",
+          "text": "Anti-nantal"
+        },
+        {
+          "value": "2",
+          "text": "Delivered"
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "format": "table",
+      "group": [],
+      "metricColumn": "none",
+      "rawQuery": true,
+      "rawSql": "SELECT\n  inpatient_info.Patient_id,inpatient_info.Bed_No,maternity_inpatient.Progress,inpatient_info.Primary_Diagnosis,inpatient_info.Secondary_Diagnosis \nFROM inpatient_info,maternity_inpatient,maternity_inpatient_delivery \nWHERE inpatient_info.Patient_id=maternity_inpatient.Patient_id=maternity_inpatient_delivery.Patient_id;\n",
+      "refId": "A",
+      "select": [
+        [
+          {
+            "params": [
+              "value"
+            ],
+            "type": "column"
+          }
+        ]
+      ],
+      "timeColumn": "time",
+      "where": [
+        {
+          "name": "$__timeFilter",
+          "params": [],
+          "type": "macro"
+        }
+      ]
+    }
+  ],
+  "timeFrom": null,
+  "timeShift": null,
+  "title": "Panel Title",
+  "transform": "table",
+  "type": "table"
+}
